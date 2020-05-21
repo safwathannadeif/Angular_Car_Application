@@ -1,0 +1,15 @@
+body {
+ color: #99ffff;
+}
+a:link {
+ color: #33ccff; padding-right: 30px;
+}
+a:visited {
+ color: #cecece;
+}
+a:hover {
+ color: #336666;
+}
+a:active {
+ color: #339999;
+}

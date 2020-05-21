@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Car Details</h1>
+<!-- 
+<div *ngIf= "confDelBut" > 
+  <button mat-fab cdkFocusInitial color="warn" cdkFocusInitial (click)="deleteCar(data)">ConfirmDelete</button>  
+  <button mat-button [mat-dialog-close]="11" >CancelDelete</button>
+</div> -->
+<div mat-dialog-content>
+  <!-- <p>The favorite Car Selec</p> -->
+  <mat-form-field>
+    <mat-label>Brand</mat-label>
+    <input matInput  readonly [(ngModel)]="data.brand">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Model</mat-label>
+    <input matInput  readonly  [(ngModel)]="data.model">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Year Made</mat-label>
+    <input matInput  readonly [(ngModel)]="data.yearMade">
+  </mat-form-field>
+<mat-form-field>
+  <mat-label>No. Of Cars Sold</mat-label>
+  <input matInput  readonly [(ngModel)]="data.noOfCarsSold">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Average Price</mat-label>
+  <input matInput  readonly [(ngModel)]="data.averagePrice">
+</mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center">
+<!-- <div *ngIf="confDelBut; else elseBlock1"><button mat-fab cdkFocusInitial color="warn" cdkFocusInitial class="icon-twicedisplay" (click)="deleteCar(data)">ConfirmDelete</button> </div> -->
+<div *ngIf="confDelBut; else elseBlock1"><button mat-raised-button color="warn" cdkFocusInitial (click)="deleteCar(data)">ConfirmDelete</button> 
+<button mat-raised-button (click)="cancelDelete()" >CancelDelete</button> 
+</div>
+<ng-template #elseBlock1> <button mat-raised-button cdkFocusInitial  (click)="deleteCar1(data)">Delete</button>
+  <button mat-raised-button  [mat-dialog-close]="11" >Close</button> 
+</ng-template>
+</div>

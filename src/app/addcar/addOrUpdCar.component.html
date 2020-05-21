@@ -1,0 +1,104 @@
+<!-- <mat-sidenav-container>
+  <mat-sidenav-content> -->
+  <mat-card >
+    
+  <mat-card-content>
+    <mat-card-title>
+      {{title}}
+      </mat-card-title>
+    <form [formGroup]="carForm" (ngSubmit)="saveForm(carForm.value,carForm.valid)" novalidate >
+    
+      <!-- Brand   brand-->
+      <mat-form-field class="form-control"  >
+        <!-- <label>Brand: </label> -->
+        <input id="brand" matInput placeholder="Brand"    formControlName="brand" required>
+        <mat-error
+         *ngIf="carForm.controls.brand?.errors && (carForm.controls.brand?.dirty || carForm.controls.brand?.touched)"> 
+          <div *ngIf="carForm.controls.brand?.errors.required">
+          Brand Name is required. 
+        </div>
+        </mat-error>
+
+       
+      </mat-form-field>
+
+    <!-- <div *ngIf="showHide">   
+         <input id="hide"  type="hidden" formControlName="hideCtl" [ngModel]="hide">  
+       
+        Old <input id="hide"  type="hidden"  [ngModel]="hide">  -old
+        
+        </div> -->
+
+      <!-- Model -->
+        <mat-form-field class="form-control">
+          <!-- <label>Model: </label> -->
+          <input id="model" matInput placeholder="Model"     formControlName="model"  required>
+          <mat-error
+            *ngIf="carForm.controls.model?.errors && (carForm.controls.model?.dirty || carForm.controls.model?.touched)">
+            <div *ngIf="carForm.controls.model?.errors.required">
+              Model Name is required.
+            </div> 
+          </mat-error>
+           <!--  yearMade  -->
+        </mat-form-field>
+         <mat-form-field class="form-control">
+          <input id="yearMade" type="number"  matInput placeholder="Year Made" formControlName="yearMade"  required>
+          <mat-error
+            *ngIf="carForm.controls.yearMade?.errors && (carForm.controls.yearMade?.dirty || carForm.controls.yearMade?.touched)">
+            <div *ngIf="carForm.controls.yearMade?.errors.required">
+              Year made  is required.
+            </div> 
+          </mat-error>
+        </mat-form-field>
+         <!--  noOfCarsSold  -->
+         <mat-form-field class="form-control">
+          <!-- <label>Model: </label> -->
+          <input id="noOfCarsSold" type="number" matInput placeholder="no Of Cars Sold" formControlName="noOfCarsSold"  required>
+          <mat-error
+            *ngIf="carForm.controls.noOfCarsSold?.errors && (carForm.controls.noOfCarsSold?.dirty || carForm.controls.noOfCarsSold?.touched)">
+            <div *ngIf="carForm.controls.noOfCarsSold?.errors.required">
+              noOfCarsSold  is required.
+            </div> 
+          </mat-error>
+        </mat-form-field>
+        
+        <!--averagePrice -->
+        <mat-form-field class="form-control">
+          <input id="averagePrice" type="number"  matInput placeholder="Average Price" formControlName="averagePrice"  required >
+          <mat-error
+            *ngIf="carForm.controls.averagePrice?.errors && (carForm.controls.averagePrice?.dirty || carForm.controls.averagePrice?.touched)">
+            <div *ngIf="carForm.controls.averagePrice?.errors.required">
+              Average Price  is required.
+            </div> 
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-card-actions align="center">
+          <!--                 
+              <ul [ngSwitch]="aOrU">
+      
+                <li *ngSwitchCase="'AddOrUpdCar.Add'">  
+                  <button  mat-button [disabled]="!carForm.valid">Create</button>
+                </li>
+                <li *ngSwitchCase="'AddOrUpdCar.Update'"> 
+                  <button  mat-button [disabled]="!carForm.valid">Update</button>
+                </li>
+              </ul> -->
+           <button mat-button mat-raised-button color="" [disabled]="!carForm.valid">{{ title }}</button> 
+           <span></span>       <span></span> 
+
+          <!-- <button  color="submit" mat-raised-button [disabled]="!carForm.valid">Create</button> -->
+          <button mat-button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+        </mat-card-actions>
+    
+    </form>
+   
+    <p>
+      Form Status: {{ carForm.status }}
+      {{carForm.value |json}}
+    
+    </p>
+  </mat-card-content>
+</mat-card>
+<!-- </mat-sidenav-content>
+</mat-sidenav-container> -->
