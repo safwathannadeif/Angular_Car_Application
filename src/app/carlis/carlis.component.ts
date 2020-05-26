@@ -96,10 +96,13 @@ export class CarlisComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.hasBackdrop = false;
+    //dialogConfig.hasBackdrop = false;
+    dialogConfig.hasBackdrop = true;
     dialogConfig.data = this.carxx;
     dialogConfig.width = '500px';
+    
     const dialogRef = this.dialog.open(DialogCarDetail, dialogConfig);
+    
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

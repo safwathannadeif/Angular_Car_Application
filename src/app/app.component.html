@@ -6,4 +6,18 @@
       <a mat-button [routerLink]="'/customer'"> Customer </a>
      </mat-toolbar-row>
     </mat-toolbar > 
+
+    <!-- <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"  align="center"></mat-spinner>  -->
+    <div *ngIf="spinnerService.visibility | async" >
+      <mat-progress-bar   mode="query"   align="center" ></mat-progress-bar>
+  {{spinnerService.reqUrlWParms}}  
+    </div>
+ 
+    <!-- <mat-progress-bar  *ngIf="spinnerService.visibility   | async"   mode="query"   align="center" ></mat-progress-bar> -->
+  
+   <!-- not Working <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility"></mat-spinner>  -->
+<!-- 
+<button mat-raised-button color="primary" (click)="doWork()">Do Work</button>
+class="modal"   -->
+
   <router-outlet></router-outlet>

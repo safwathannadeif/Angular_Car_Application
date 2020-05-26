@@ -1,1 +1,64 @@
+<div class="topspace">
+  <!-- <mat-title> Serach Customer </mat-title> -->
+ <h3> <span></span>       <span></span> Serach Customer </h3> 
+</div>
+<!-- <div class="main-cent"> -->
+  <span></span>       <span></span>
+<form class="example-container" align="center" [formGroup]="searchForm" (ngSubmit)="saveForm(searchForm.value,searchForm.valid)" novalidate >  
+  <span></span>       <span></span>
+
+      <div class="overlay" *ngIf="progreBarOn">
+    <mat-progress-bar class="barprogrs"  mode="query"></mat-progress-bar>
+  </div> 
+<!--  -->
+  <mat-form-field>
+    <mat-label>SearchBy----</mat-label>
+      <mat-select formControlName="selectByCtl" required>    
+      
+      <mat-option *ngFor="let selb of selectByAry" [value]="selb">
+        {{selb.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>#1 SearchBy First</mat-hint>
+  </mat-form-field>
+  <span></span>       <span></span>
+  <mat-form-field>
+  <mat-label>{{ searchTitle }}</mat-label>
+  <input matInput id="cusIdOrCusNameCtl" type="text"   placeholder="cusIdOrCusNameCtl" formControlName="cusIdOrCusNameCtl"  required>
+  <mat-hint>#2 CusIdOrCusName Input</mat-hint>
+  </mat-form-field>
+ <!----> 
+<span></span>       <span></span>
+
+<mat-card-actions align="center">
+ 
+   <button mat-button mat-raised-button color="" [disabled]="!searchForm.valid">Search</button> 
+   <span></span>       <span></span> 
+
+  <!-- <button  color="submit" mat-raised-button [disabled]="!carForm.valid">Create</button> -->
+  <button mat-button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+</mat-card-actions>
+
+
+
+
+  <span></span>       <span></span>
+  
+  <p> Selected By Num: {{selectedValueNum}} </p>
+</form>
+
+<p> Selected By Num: {{selectedValueNum}} </p>
+
+<p>
+  Form Status: {{ searchForm.status }}
+  {{searchForm.value |json}}
+
+</p>
+
+
+
 <p>customer works!</p>
+<p>
+    {{cusModel|json}}   
+  
+  </p>

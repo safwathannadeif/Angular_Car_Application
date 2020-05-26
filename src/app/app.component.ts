@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from './spinner.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CarM9';
+  //showSpinner: boolean;
+  constructor(public spinnerService: SpinnerService )  { }
+
+  ngOnInit() {
+  }
+
+  // doWork() {
+
+  //   this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employees')
+  //     .subscribe(
+  //       success => {
+  //         console.log('Done');
+  //       },
+  //       error => {
+  //         console.error('Error');
+  //       }
+  //     );
+  // }
 }

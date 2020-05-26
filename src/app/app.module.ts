@@ -25,7 +25,12 @@ import {  ReactiveFormsModule } from '@angular/forms';
 import {AddOrUpdCarComponent} from './addcar/addOrUpdCar.component'
 import {SharedService} from './shared.service'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { MatDividerModule } from "@angular/material/divider";
+import { MatSelectModule } from '@angular/material/select';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CustomHttpInterceptor } from './http-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     CustomerdetailsComponent,
     DialogCarDetail ,
     AboutComponent,
-    AddOrUpdCarComponent,
+    AddOrUpdCarComponent
+   
+    
   ],
   imports: [
     BrowserModule,
@@ -53,11 +60,23 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatDividerModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+   
+
   ],
-  providers: [],
+  
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: CustomHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent] ,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class AppModule { }
 

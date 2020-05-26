@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import {Car } from   "./models/car.model"   ; 
+import {ModelCustomerDetails } from   "./models/customerDetails.model"   ; 
 import { Observable } from 'rxjs';
 import {  throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,6 +20,17 @@ export class Comservices {
     this.baseUrl = environment.apiEndPoint;
 
   } ;
+//
+getCusByCusId(cusId:string): Observable<ModelCustomerDetails> {
+  return this.http.get<ModelCustomerDetails>(this.baseUrl +"/getCusByCusId/" +cusId) 
+  .pipe(catchError(this.handleError));
+    
+};
+getCusByNames(cusName:string): Observable<ModelCustomerDetails> {
+  return this.http.get<ModelCustomerDetails>(this.baseUrl +"/getCusByName/" +cusName) 
+  .pipe(catchError(this.handleError));
+    
+};
 //
 addCar(cari:Car): Observable<Car> {
   return this.http.post<Car>(this.baseUrl+"/addCar", cari)
