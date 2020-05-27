@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false ,
-  apiEndPoint:"http://localhost:8080/car" 
+  apiEndPoint:"http://localhost:8080/car" ,
+  httpTimeOutMsecs:120000
   
 };
 

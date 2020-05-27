@@ -8,11 +8,13 @@
     </mat-toolbar > 
 
     <!-- <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"  align="center"></mat-spinner>  -->
-    <div *ngIf="spinnerService.visibility | async" >
-      <mat-progress-bar   mode="query"   align="center" ></mat-progress-bar>
-  {{spinnerService.reqUrlWParms}}  
-    </div>
- 
+
+        <!-- Previoud work 
+          <div *ngIf="spinnerService.visibility | async" >
+          <mat-progress-bar   mode="query"   align="center" ></mat-progress-bar>
+      {{spinnerService.reqUrlWParms}}  
+        </div>
+     Previous work -->
     <!-- <mat-progress-bar  *ngIf="spinnerService.visibility   | async"   mode="query"   align="center" ></mat-progress-bar> -->
   
    <!-- not Working <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility"></mat-spinner>  -->

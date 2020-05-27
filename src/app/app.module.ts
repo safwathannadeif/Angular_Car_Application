@@ -29,9 +29,12 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatSelectModule } from '@angular/material/select';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CustomHttpInterceptor } from './http-interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {BarProgressDialog} from './progressBar.service' ;
+import {AppCustomHttpInterceptor}  from './httpGen-Interceptor'
+
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,9 +44,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     CustomerdetailsComponent,
     DialogCarDetail ,
     AboutComponent,
-    AddOrUpdCarComponent
-   
-    
+    AddOrUpdCarComponent,
+    BarProgressDialog , 
   ],
   imports: [
     BrowserModule,
@@ -65,15 +67,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatIconModule,
-   
-
   ],
   
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: CustomHttpInterceptor,
+    useClass:  AppCustomHttpInterceptor ,
     multi: true
   }],
+ 
   bootstrap: [AppComponent] ,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 

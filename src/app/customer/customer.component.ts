@@ -31,7 +31,7 @@ export class CustomerComponent implements OnInit {
   cusModel: ModelCustomerDetails;
  
  searchTitle: string="xxxx" ;
- progreBarOn:boolean=false ;
+ 
 
   constructor(private comService: Comservices, public router: Router, public fb: FormBuilder)  {
     
@@ -52,6 +52,7 @@ saveForm(formvalue, isValid:boolean) {
  console.log("this.searchForm saved values= n and cus [" + n +"][" + cus +"]" ) ;
 
  if (n === 1) this.getByCusIdHttp(cus) ;
+ if (n === 2) this.getByCusNameHttp(cus) ;
  
 
   }
@@ -96,20 +97,32 @@ saveForm(formvalue, isValid:boolean) {
     )
    // this.onChanges();
   }
-
+  getByCusNameHttp(cusName:string )
+  {
   
-
+    this.comService.getCusByNames(cusName).subscribe( 
+      (data) => {
+        this.cusModel = data as ModelCustomerDetails;
+        console.log("this.testCusMode.name:" + this.cusModel.name ) ;
+        console.log("this.testCusMode.cusCarDetailsElmListDisplay[2]" + this.cusModel.cusCarDetailsElmListDisplay[2].plateId);
+       
+      },
+      (error) => {
+        console.log(error);
+      }
+      
+    );
+  
+    }
   
 getByCusIdHttp(cusId)
 {
-  //// just tetsing
-  this.progreBarOn=false ;
   this.comService.getCusByCusId(cusId).subscribe( 
     (data) => {
       this.cusModel = data as ModelCustomerDetails;
       console.log("this.testCusMode.name:" + this.cusModel.name ) ;
       console.log("this.testCusMode.cusCarDetailsElmListDisplay[2]" + this.cusModel.cusCarDetailsElmListDisplay[2].plateId);
-      this.progreBarOn=false ;
+   
     },
     (error) => {
       console.log(error);

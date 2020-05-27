@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerService } from './spinner.service';
+import { ProgressBarService } from './progressBar.service';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'CarM9';
   //showSpinner: boolean;
-  constructor(public spinnerService: SpinnerService )  { }
+  constructor(public spinnerService: ProgressBarService )  { }
 
   ngOnInit() {
   }

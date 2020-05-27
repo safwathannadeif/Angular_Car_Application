@@ -7,10 +7,6 @@
 <form class="example-container" align="center" [formGroup]="searchForm" (ngSubmit)="saveForm(searchForm.value,searchForm.valid)" novalidate >  
   <span></span>       <span></span>
 
-      <div class="overlay" *ngIf="progreBarOn">
-    <mat-progress-bar class="barprogrs"  mode="query"></mat-progress-bar>
-  </div> 
-<!--  -->
   <mat-form-field>
     <mat-label>SearchBy----</mat-label>
       <mat-select formControlName="selectByCtl" required>    
