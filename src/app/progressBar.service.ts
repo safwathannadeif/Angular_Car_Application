@@ -60,7 +60,8 @@ export class ProgressBarService {
 
   endProgsBar() {
     this.dialog.closeAll() ;
-
+    console.log("endProgsBar with closeAll Done........................................") ;
+   
     
     this.visibility.next(false);
   }

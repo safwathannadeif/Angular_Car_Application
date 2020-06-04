@@ -2,10 +2,10 @@ export interface  ModelCustomerDetails {
    
    name: string ;
    cusId: string ;
-   cusCarDetailsElmListDisplay: cusCarDetailsElmListDisp[] ;
+   cusCarDetailsElmListDisplay: CusCarDetailsElmListDisp[] ;
   }
 
-interface cusCarDetailsElmListDisp { 
+export interface CusCarDetailsElmListDisp { 
   carColor: string ;
   carMileage: number ;
   plateId: string ;

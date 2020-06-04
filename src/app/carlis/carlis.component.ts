@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Car } from '../models/car.model';
+import { Car2 } from '../models/car2.model';
+import { Car2Entry } from '../models/Car2.model' ;  
 import { Comservices } from '../Comservices';
 import { Inject } from '@angular/core';
 import {
@@ -25,19 +26,21 @@ export class CarlisComponent implements OnInit {
     'brand',
     'yearMade',
     'model',
+    'color',
+    'averagePrice',
+    'noOfCarsSold' ,
+    'noOfCarsAvailable',
     'detail',
-    'update',
+    'update'
   ];
  
   actionStr: string;
-  carLis:Car[] ;
-  carxx: Car;
-  public dataSource = new MatTableDataSource<Car>();
+  carLis:Car2[] ;
+  carxx: Car2;
+  public dataSource = new MatTableDataSource<Car2>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // tslint:disable-next-line: whitespace
-  // tslint:disable-next-line: typedef-whitespace
- // carAry:Car[] ;
+ 
   constructor(
     private carservice: Comservices,
     public dialog: MatDialog,
@@ -47,11 +50,27 @@ export class CarlisComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveCars();
+   
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
    
   }
-
+  selectedItem33(row:Car2,elm:Car2Entry) {
+    /////  //https://stackoverflow.com/questions/44120645/angular-update-object-in-object-array
+    // console.log('Calling selectedItem33 to do................. ....');
+    // console.log('row:Car2==' + row.model ) ;
+    // console.log('row:Car2==' + row.colorIndex ) ;
+    // console.log('elm:Car2Entry==' + elm.color ) ;
+   // let car2xx = this.dataSource.data.find(itm => itm.brand === row.brand && itm.model === row.model )
+    let itemIndex = row.lisByColor.findIndex(item  => item.color ===  elm.color) ;
+   // let itemToReplce = row.lisByColor.find(item  => item.color ===  elm.color) ;
+    //Update the input row to match the colore selected by elm/Car2Entry
+    row.colorIndex=itemIndex ;
+    row.lisByColor[itemIndex].averagePrice=elm.averagePrice ;
+    row.lisByColor[itemIndex].noOfCarsAvailable=elm.noOfCarsAvailable ;
+    row.lisByColor[itemIndex].noOfCarsSold=elm.noOfCarsSold ;
+    row.lisByColor[itemIndex].color=elm.color ;
+  }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -59,25 +78,25 @@ export class CarlisComponent implements OnInit {
     }
   }
   addNew() {
-    console.log('Start Add New ....');
+   // console.log('Start Add New ....');
     this.sharedService.addCase();
     this.router.navigateByUrl('/addOrUpdcar'); //    addOrUpdcar
-    console.log('End Add New ....');
+   // console.log('End Add New ....');
   }
   updCar(carToUpd) {
-    console.log('Start Upd case ....');
+  //  console.log('Start Upd case ....');
     //console.log("-3  CarLisComponent.this.carLis=" + this.carLis[2].carRefId ) ;
     this.sharedService.updCase(carToUpd);
     this.router.navigateByUrl('/addOrUpdcar');
-    console.log('End Upd Case ...');
+   // console.log('End Upd Case ...');
   }
   retrieveCars() {
 
-    this.carservice.getAllCars().subscribe(
+    this.carservice.getAllCars2().subscribe(
       (data) => {
-        this.carLis = data as Car[] ;
+        this.carLis = data as Car2[] ;
+        this.updateCarLisAfteLoad()   ;
         this.dataSource.data =  this.carLis  ;  
-     
       },
       (error) => {
         console.log(error);
@@ -85,34 +104,35 @@ export class CarlisComponent implements OnInit {
     );
  
   }
+  ///////////////////////////////////////     updateItem(newItem){
+    updateCarLisAfteLoad(){
+    for (let i = 0; i < this.carLis.length; i++) {
+        // if(this.itemsArray[i].id == newItem.id){  ///////////// here is with condition 
+        //   this.users[i] = newItem;
+        // }
+        this.carLis[i].colorIndex= 0 ;
+      }
+  }
   detail2(carx2) {
-    console.log('Setting Car from detail2 .....' + carx2.brand);
     this.carxx = carx2;
-    this.openDialog();
-   
+    this.openDialog();   
   }
   openDialog(): void {
-    console.log('Setting Car from openDialog .....' + this.carxx.brand);
+    
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    //dialogConfig.hasBackdrop = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = this.carxx;
     dialogConfig.width = '500px';
-    
     const dialogRef = this.dialog.open(DialogCarDetail, dialogConfig);
     
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       this.actionStr = result;
-      console.log('The dialog Closed Action=' + this.actionStr);
     });
   }
 }
 @Component({
-  // tslint:disable-next-line: component-selector
   selector: 'dialog-car-detail2',
   templateUrl: './dialog-car-detail2.html',
 })
@@ -123,7 +143,7 @@ export class DialogCarDetail {
     private carservice: Comservices,
     public dialogRef: MatDialogRef<DialogCarDetail>,
 
-    @Inject(MAT_DIALOG_DATA) public data: Car
+    @Inject(MAT_DIALOG_DATA) public data: Car2
   ) {
     this.confDelBut = false;
   }
@@ -136,7 +156,6 @@ export class DialogCarDetail {
   }
 
   deleteCar(car: { carRefId: string; }): void {
-    console.log('===> The dialog Closed with inp Car model=' + car.carRefId);
     this.carservice.deleteCar(car.carRefId).subscribe(
       (data) => {
         

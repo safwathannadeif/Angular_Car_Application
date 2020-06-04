@@ -5,6 +5,7 @@
 export const environment = {
   production: false ,
   apiEndPoint:"http://localhost:8080/car" ,
+  apiEndPoint2:"http://localhost:8080/car2" ,
   httpTimeOutMsecs:120000
   
 };

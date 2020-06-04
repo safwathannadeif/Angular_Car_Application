@@ -3,6 +3,7 @@ import { Comservices } from '../Comservices';
 import { ModelCustomerDetails } from '../models/customerDetails.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors } from "@angular/forms";
+import { SharedService } from '../shared.service';
 
 
 interface SelectBy {
@@ -33,7 +34,7 @@ export class CustomerComponent implements OnInit {
  searchTitle: string="xxxx" ;
  
 
-  constructor(private comService: Comservices, public router: Router, public fb: FormBuilder)  {
+  constructor(private sharedService: SharedService, private comService: Comservices, public router: Router, public fb: FormBuilder)  {
     
   }
  
@@ -105,7 +106,7 @@ saveForm(formvalue, isValid:boolean) {
         this.cusModel = data as ModelCustomerDetails;
         console.log("this.testCusMode.name:" + this.cusModel.name ) ;
         console.log("this.testCusMode.cusCarDetailsElmListDisplay[2]" + this.cusModel.cusCarDetailsElmListDisplay[2].plateId);
-       
+        this.goToDetails() ;      //since Aynch park here then go to CusDetails
       },
       (error) => {
         console.log(error);
@@ -122,7 +123,7 @@ getByCusIdHttp(cusId)
       this.cusModel = data as ModelCustomerDetails;
       console.log("this.testCusMode.name:" + this.cusModel.name ) ;
       console.log("this.testCusMode.cusCarDetailsElmListDisplay[2]" + this.cusModel.cusCarDetailsElmListDisplay[2].plateId);
-   
+      this.goToDetails() ;      //since Aynch park here then go to CusDetails
     },
     (error) => {
       console.log(error);
@@ -130,5 +131,11 @@ getByCusIdHttp(cusId)
     
   );
  
+}
+goToDetails() :void
+{
+  this.sharedService.setCusDtails(this.cusModel) ;
+ console.log("saved Done with Setting CusDetaols.........." ) ;
+ this.router.navigateByUrl('/customerDetail'); //    addOrUpdcar
 }
 }

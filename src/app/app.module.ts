@@ -33,6 +33,11 @@ import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BarProgressDialog} from './progressBar.service' ;
 import {AppCustomHttpInterceptor}  from './httpGen-Interceptor'
+import {MatRadioModule} from '@angular/material/radio' ;
+import {MatChipsModule} from '@angular/material/chips'; 
+import {MatAutocompleteModule, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatMenuModule} from '@angular/material/menu'; 
+
 
  
 @NgModule({
@@ -67,6 +72,12 @@ import {AppCustomHttpInterceptor}  from './httpGen-Interceptor'
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatMenuModule
+    
+
   ],
   
   providers: [{

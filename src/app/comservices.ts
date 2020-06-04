@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import {Car } from   "./models/car.model"   ; 
+import {Car2 } from   "./models/car2.model"   ; 
 import {ModelCustomerDetails } from   "./models/customerDetails.model"   ; 
 import { Observable } from 'rxjs';
 import {  throwError } from 'rxjs';
@@ -16,11 +17,19 @@ import { environment } from '../environments/environment';
 
 export class Comservices {
   baseUrl:string ;
+  baseUrl2:string ;
   constructor(private http: HttpClient) { 
     this.baseUrl = environment.apiEndPoint;
+    this.baseUrl2 = environment.apiEndPoint2;
 
   } ;
 //
+getAllCars2(): Observable<Car2[]> {
+  return this.http.get<Car2[]>(this.baseUrl2 +"/lisCars2") 
+  .pipe(catchError(this.handleError));
+    
+};
+
 getCusByCusId(cusId:string): Observable<ModelCustomerDetails> {
   return this.http.get<ModelCustomerDetails>(this.baseUrl +"/getCusByCusId/" +cusId) 
   .pipe(catchError(this.handleError));

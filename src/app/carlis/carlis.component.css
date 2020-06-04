@@ -8,12 +8,12 @@ table {
     width: 100%;
   }
    th {
-    width: 25%;
+    width: 12%;
     font-weight: bold;
   }
 
   td{
-    width: 25%;
+    width: 12%;
   }
   
   .example-second-header-row {
