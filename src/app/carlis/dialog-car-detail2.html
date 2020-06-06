@@ -1,39 +1,93 @@
 <h1 mat-dialog-title>Car Details</h1>
-<!-- 
-<div *ngIf= "confDelBut" > 
-  <button mat-fab cdkFocusInitial color="warn" cdkFocusInitial (click)="deleteCar(data)">ConfirmDelete</button>  
+<!--
+<div *ngIf= "confDelBut" >
+  <button mat-fab cdkFocusInitial color="warn" cdkFocusInitial (click)="deleteCar(data)">ConfirmDelete</button>
   <button mat-button [mat-dialog-close]="11" >CancelDelete</button>
 </div> -->
 <div mat-dialog-content>
   <!-- <p>The favorite Car Selec</p> -->
-  <mat-form-field>
+
+  <div class="mat-elevation-z8">
+  <table  >
+    <tr>
+      <td>
+        <mat-form-field appearance="outline">
     <mat-label>Brand</mat-label>
-    <input matInput  readonly [(ngModel)]="data.brand">
+    <input matInput  readonly [(ngModel)]="car2Details.car2.brand">
   </mat-form-field>
-  <mat-form-field>
+</td>
+<td>
+  <mat-form-field appearance="outline">
     <mat-label>Model</mat-label>
-    <input matInput  readonly  [(ngModel)]="data.model">
+    <input matInput  readonly  [(ngModel)]="car2Details.car2.model">
+  </mat-form-field>
+  </td>
+
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Year Made</mat-label>
+    <input matInput  readonly [(ngModel)]="car2Details.car2.yearMade">
+  </mat-form-field>
+  </td>
+   <!--
+  <mat-form-field>
+    <mat-label>Average Price(All)</mat-label>
+    <input matInput  readonly [(ngModel)]="car2Details.averagePriceTot">
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Year Made</mat-label>
-    <input matInput  readonly [(ngModel)]="data.yearMade">
+    <mat-label>All No Of Cars Sold</mat-label>
+    <input matInput  readonly [(ngModel)]="car2Details.noOfCarsSoldTot">
   </mat-form-field>
-<!-- <mat-form-field>
-  <mat-label>No. Of Cars Sold</mat-label>
-  <input matInput  readonly [(ngModel)]="data.noOfCarsSold">
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Average Price</mat-label>
-  <input matInput  readonly [(ngModel)]="data.averagePrice">
-</mat-form-field> -->
+  <mat-form-field>
+    <mat-label>All No Of Cars Available</mat-label>
+    <input matInput  readonly [(ngModel)]="car2Details.noOfCarsAvailableTot">
+  </mat-form-field> -->
+  </tr>
+  </table>
+</div>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource2" >
+
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef > Color </th>
+      <td mat-cell [style.color]=row2.color *matCellDef="let row2"> {{row2.color}} </td>
+      <td mat-footer-cell *matFooterCellDef>Total </td>
+    </ng-container>
+    <ng-container matColumnDef="averagePrice">
+      <th mat-header-cell *matHeaderCellDef > AveragePrice </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.averagePrice}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{car2Details.averagePriceTot}} </td>
+    </ng-container>
+    <ng-container matColumnDef="noOfCarsSold">
+      <th mat-header-cell *matHeaderCellDef > NoOfCarsSold </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.noOfCarsSold}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{car2Details.noOfCarsSoldTot}} </td>
+    </ng-container>
+    <ng-container matColumnDef="noOfCarsAvailable">
+      <th mat-header-cell *matHeaderCellDef > NoOfCarsAvailable </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.noOfCarsAvailable}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{car2Details.noOfCarsAvailableTot}} </td>
+    </ng-container>
+    <ng-container matColumnDef="srByColor">
+      <th mat-header-cell *matHeaderCellDef > SR_ByColor </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.srByColor}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{car2Details.srTot}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row2; columns: displayedColumns2;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns2"></tr>
+ </table>
+
 </div>
 
 <div mat-dialog-actions align="center">
 <!-- <div *ngIf="confDelBut; else elseBlock1"><button mat-fab cdkFocusInitial color="warn" cdkFocusInitial class="icon-twicedisplay" (click)="deleteCar(data)">ConfirmDelete</button> </div> -->
-<div *ngIf="confDelBut; else elseBlock1"><button mat-raised-button color="warn" cdkFocusInitial (click)="deleteCar(data)">ConfirmDelete</button> 
-<button mat-raised-button (click)="cancelDelete()" >CancelDelete</button> 
+<div *ngIf="confDelBut; else elseBlock1"><button mat-raised-button color="warn" cdkFocusInitial (click)="deleteCar(car2Details.car2.carRefId)">ConfirmDelete</button>
+<button mat-raised-button (click)="cancelDelete()" >CancelDelete</button>
 </div>
-<ng-template #elseBlock1> <button mat-raised-button cdkFocusInitial  (click)="deleteCar1(data)">Delete</button>
-  <button mat-raised-button  [mat-dialog-close]="11" >Close</button> 
+<ng-template #elseBlock1> <button mat-raised-button cdkFocusInitial  (click)="deleteCar1(car2Details.car2)">Delete</button>
+  <button mat-raised-button  [mat-dialog-close]="11" >Close</button>
 </ng-template>
 </div>

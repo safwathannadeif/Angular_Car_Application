@@ -10,5 +10,6 @@ export interface Car2Entry {
   averagePrice: number;
   noOfCarsSold: number;
   noOfCarsAvailable: number;
+  srByColor: number;
   color: string;
 }

@@ -2,32 +2,32 @@ table {
     width: 100%;
   }
   tr:hover {background-color: #f5f5f5;}
-  
+
   .mat-form-field {
     font-size: 14px;
     width: 100%;
   }
    th {
-    width: 12%;
+    width: 8%;
     font-weight: bold;
   }
 
   td{
-    width: 12%;
+    width: 8%;
   }
-  
+
   .example-second-header-row {
     font-style: italic;
   }
-  
+
   .example-first-footer-row {
     font-weight: bold;
   }
-  
+
   .example-second-footer-row td {
     color: #900000;
   }
-  
+
   .mat-column-action {
     flex: 0 0 100px;
   }
@@ -37,3 +37,7 @@ table {
   /* .icon-twicedisplay {
     transform: scale(11);
  } */
+
+ tr.mat-footer-row {
+  font-weight: bold;
+}
