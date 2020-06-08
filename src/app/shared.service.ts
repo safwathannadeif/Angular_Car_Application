@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Car } from "./models/car.model";
+import { Car } from './models/car.model';
 import { ModelCustomerDetails } from './models/customerDetails.model';
 
 @Injectable({
@@ -9,24 +9,24 @@ import { ModelCustomerDetails } from './models/customerDetails.model';
 export class SharedService {
   public  addOrUpd: AddOrUpdCarEnum ;
   public  carToUpd: Car ;
-  public  modelCustomerDetails:ModelCustomerDetails ;
+  public  modelCustomerDetails: ModelCustomerDetails ;
   constructor() { }
 
-  setCusDtails(d:ModelCustomerDetails) :void
+  setCusDtails(d: ModelCustomerDetails): void
   {
-    this.modelCustomerDetails=d ;
-    
+    this.modelCustomerDetails = d ;
+
   }
-  getCusDetails() :ModelCustomerDetails 
+  getCusDetails(): ModelCustomerDetails
   {
     return this.modelCustomerDetails ;
   }
   addCase() {
     this.addOrUpd = AddOrUpdCarEnum.Add ;
-  
+
   }
   updCase(inpCar) {
-    this.carToUpd= inpCar ;
+    this.carToUpd = inpCar ;
     this.addOrUpd = AddOrUpdCarEnum.Update;
   }
    getCarToUse()  {

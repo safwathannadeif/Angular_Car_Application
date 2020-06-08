@@ -4,11 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
 import { Comservices } from '../Comservices';
 import { Car2 } from '../models/car2.model';
 import { Car2Entry } from '../models/Car2.model';
-import { SharedService } from '../shared.service';
 import { Car2Details } from '../models/car2Details.model';
+import { CarForSale } from '../models/CarForSale.model';
+import { SharedService } from '../shared.service';
+
 
 @Component({
   selector: 'app-carlis',
@@ -45,7 +48,8 @@ export class CarlisComponent implements OnInit {
     private carservice: Comservices,
     public dialog: MatDialog,
     public router: Router,
-    public sharedService: SharedService
+    public sharedService: SharedService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -59,7 +63,7 @@ export class CarlisComponent implements OnInit {
     console.log('AddRow with ' + row.lisByColor[row.colorIndex].color ) ;
   }
   // tslint:disable-next-line: no-unused-expression
-  updateRow(row: Car2) : void
+  updateRow(row: Car2): void
   {
     console.log('UpdateRow with ' + row.lisByColor[row.colorIndex].color ) ;
   }
@@ -67,6 +71,12 @@ export class CarlisComponent implements OnInit {
   deleteRow(row: Car2)
   {
     console.log('deleteRow with ' + row.lisByColor[row.colorIndex].color ) ;
+  }
+  addToCart(row: Car2)
+  {
+    console.log('addToCart with ' + row.lisByColor[row.colorIndex].color ) ;
+    this.cartService.addToCart2(row) ;
+
   }
 
 
@@ -178,7 +188,7 @@ openDialog() {
     dialogRef.afterClosed().subscribe((result) => {
       this.actionStr = result;
     });
-  };
+  }
 }
 @Component({
   // tslint:disable-next-line: component-selector

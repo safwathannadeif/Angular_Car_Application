@@ -1,25 +1,41 @@
-<mat-toolbar > 
-    <mat-toolbar-row>
-      <!-- <h1>CarMangoDb</h1> -->
-      <a mat-button [routerLink]="'/about'"> About </a>
-      <a mat-button [routerLink]="'/car'"> Car </a>
-      <a mat-button [routerLink]="'/customer'"> Customer </a>
-     </mat-toolbar-row>
-    </mat-toolbar > 
+<mat-toolbar>
+  <mat-toolbar-row>
+    <!-- <h1>CarMangoDb</h1> -->
+    <a mat-button [routerLink]="'/about'"> About </a>
+    <a mat-button [routerLink]="'/car'"> Car </a>
+    <a mat-button [routerLink]="'/customer'"> Customer </a>
+    <a>
+      <button (click)="doCartDialog()">
+        <mat-icon>shopping_cart</mat-icon> {{ cartService.noInCart }}
+      </button>
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-    <!-- <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"  align="center"></mat-spinner>  -->
+<!--
+        https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/#mat-icon-list-category-action
+      <div class="example-flex-container">
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>hopping_cart</mat-icon>
+        </button>
+        </div>
+-->
 
-        <!-- Previoud work 
+<!-- <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async"  align="center"></mat-spinner>  -->
+
+<!-- Previoud work
           <div *ngIf="spinnerService.visibility | async" >
           <mat-progress-bar   mode="query"   align="center" ></mat-progress-bar>
-      {{spinnerService.reqUrlWParms}}  
+      {{spinnerService.reqUrlWParms}}
         </div>
-     Previous work -->
-    <!-- <mat-progress-bar  *ngIf="spinnerService.visibility   | async"   mode="query"   align="center" ></mat-progress-bar> -->
-  
-   <!-- not Working <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility"></mat-spinner>  -->
-<!-- 
-<button mat-raised-button color="primary" (click)="doWork()">Do Work</button>
-class="modal"   -->
+     Previous work
+    -->
+<!-- <mat-progress-bar  *ngIf="spinnerService.visibility   | async"   mode="query"   align="center" ></mat-progress-bar> -->
 
-  <router-outlet></router-outlet>
+<!-- not Working <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility"></mat-spinner>  -->
+<!--
+<button mat-raised-button color="primary" (click)="doWork()">Do Work</button>
+class="modal"
+ -->
+
+<router-outlet></router-outlet>

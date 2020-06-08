@@ -1,0 +1,61 @@
+<p>cart-dialog works!</p>
+
+<!--
+<div *ngIf="confDelBut; else elseBlock1"><button mat-raised-button color="warn" cdkFocusInitial (click)="deleteCar(car2Details.car2.carRefId)">ConfirmDelete</button>
+  <button mat-raised-button (click)="cancelDelete()" >CancelDelete</button>
+  </div>
+  <ng-template #elseBlock1> <button mat-raised-button cdkFocusInitial  (click)="deleteCar1(car2Details.car2)">Delete</button>
+    <button mat-raised-button  [mat-dialog-close]="11" >Close</button>
+  </ng-template>
+ -->
+
+<div *ngIf="POrM; else elseBlockx"> <h3>  Manage  </h3>
+</div>
+<ng-template #elseBlockx> Pick </ng-template>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="tableSource2">
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef> Brand </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.brand}} </td>
+    </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.model}} </td>
+    </ng-container>
+    <ng-container matColumnDef="yearMade">
+      <th mat-header-cell *matHeaderCellDef> Year-Made </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.yearMade}} </td>
+    </ng-container>
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef> Color </th>
+      <td mat-cell [style.color]=row2.color *matCellDef="let row2"> {{row2.color}} </td>
+    </ng-container>
+    <ng-container matColumnDef="noOfCarsAvailable">
+      <th mat-header-cell *matHeaderCellDef> NoOfCarsAvailable </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.noOfCarsAvailable}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="averagePrice">
+      <th mat-header-cell *matHeaderCellDef> AveragePrice </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.averagePrice}} </td>
+    </ng-container>
+    <ng-container matColumnDef="chkbox">
+    <th mat-header-cell *matHeaderCellDef> Check </th>
+    <td mat-cell *matCellDef="let row2">
+    <mat-checkbox   (change)="onChangeEventFunc(row2, $event)">
+
+      </mat-checkbox>
+    </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableSource2Columns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row2; columns: tableSource2Columns;"></tr>
+
+  </table>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="selected" cdkFocusInitial>Ok</button>
+</div>

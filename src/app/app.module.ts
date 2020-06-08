@@ -18,28 +18,30 @@ import { AboutComponent } from './about/about.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule } from  '@angular/material/button' ;
 import {MatIconModule} from    '@angular/material/icon';
-import {DialogCarDetail} from  './carlis/carlis.component'; //   
+import {DialogCarDetail} from  './carlis/carlis.component'; //
 import { FormsModule } from '@angular/forms';
 /* Reactive form services */
 import {  ReactiveFormsModule } from '@angular/forms';
-import {AddOrUpdCarComponent} from './addcar/addOrUpdCar.component'
-import {SharedService} from './shared.service'
+import {AddOrUpdCarComponent} from './addcar/addOrUpdCar.component';
+import {SharedService} from './shared.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatDividerModule } from "@angular/material/divider";
+import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox' ;
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BarProgressDialog} from './progressBar.service' ;
-import {AppCustomHttpInterceptor}  from './httpGen-Interceptor'
+import {AppCustomHttpInterceptor}  from './httpGen-Interceptor';
 import {MatRadioModule} from '@angular/material/radio' ;
-import {MatChipsModule} from '@angular/material/chips'; 
+import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatMenuModule} from '@angular/material/menu'; 
+import {MatMenuModule} from '@angular/material/menu';
+import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 
 
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import {MatMenuModule} from '@angular/material/menu';
     DialogCarDetail ,
     AboutComponent,
     AddOrUpdCarComponent,
-    BarProgressDialog , 
+    BarProgressDialog,
+    CartDialogComponent ,
   ],
   imports: [
     BrowserModule,
@@ -75,17 +78,16 @@ import {MatMenuModule} from '@angular/material/menu';
     MatRadioModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatMenuModule
-    
-
+    MatMenuModule,
+    MatCheckboxModule
   ],
-  
+
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass:  AppCustomHttpInterceptor ,
     multi: true
   }],
- 
+
   bootstrap: [AppComponent] ,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
