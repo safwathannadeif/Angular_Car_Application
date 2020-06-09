@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { CartService } from '../cart.service';
 import { CarForSale } from '../models/CarForSale.model';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 // tslint:disable-next-line: class-name
 // export class chekRow {
 //   carForSale: CarForSale;
@@ -25,8 +26,10 @@ export class CartDialogComponent implements OnInit {
     'chkbox'
   ];
   // tslint:disable-next-line: new-parens
-  public  selected  = new Array<CarForSale>();
-  public POrM: boolean ;
+  public  selectedArry  = new Array<CarForSale>();
+  public dialogTitle = 'Pick To Customer' ;
+  public buttonTitle =  'PushToCustomer' ;                            // PickOrMange
+  public buttonEnble = false ;
   constructor(
     public dialogRef: MatDialogRef<CartDialogComponent> ,
     @Inject(MAT_DIALOG_DATA) public carForSaleAry: CarForSale[],
@@ -35,22 +38,48 @@ export class CartDialogComponent implements OnInit {
   // tslint:disable-next-line: whitespace
    { this.tableSource2.data=carForSaleAry;}
 ngOnInit() {
-  this.POrM = this.cartService.POrM ;
+  if ( this.cartService.POrM === 'Manage' ) {
+    this.dialogTitle = 'Confirm Cart View?' ;
+    this.buttonTitle = 'Delete' ;
+  }
 
   }
+public removeCars() {
+  this.cartService.removeCars(this.selectedArry) ;
+  // this.dialogRef.componentInstance.carForSaleAry = this.cartService.getCarsForSales();
+  // this.dialogRef.componentInstance.carForSaleAry.filter(item => !this.selectedArry.includes(item)) ;
+  // this.dataSource = new MatTableDataSource(results);
+  // this.tableSource2 = new MatTableDataSource(this.carForSaleAry);
+}
+
   onNoClick()  {
     this.dialogRef.close() ;
 
   }
-  onChangeEventFunc(row: CarForSale, isChecked: boolean) {
-   if (isChecked) {
-      this.selected.push(row) ;
+  onChangeEventChkBox(row: CarForSale,  event: MatCheckboxChange): void {
+    console.log('event=' + event.checked +  ' and row=' + row.color) ;
+    console.log('calling onChangeEventChkBox isChecked=' + event) ;
+    if (event.checked) {
+    //  check and prevent duplication
+    // tslint:disable-next-line: max-line-length
+    if ( this.selectedArry.some(elm => elm.model === row.model  &&  elm.brand === row.brand && elm.color === row.color && elm.yearMade === row.yearMade) ) {  return ; }
+
+    this.selectedArry.push(row) ;
     } else {
-      const index = this.selected.findIndex(elm => row.brand === elm.brand && row.model === elm.model);
-     // this.chkCaptured.removeAt(index);
-      this.selected.splice(index, 1);
-    }
+      const index = this.selectedArry.findIndex(elm => row.brand === elm.brand && row.model === elm.model  && row.color === elm.color);
+      console.log('index=' + index) ;
+      this.selectedArry.splice(index, 1);
+
   }
 
-}
+     // tslint:disable-next-line: align
+     console.log('this.selectedArry.length=' + this.selectedArry.length) ;
 
+
+    if ( this.selectedArry.length > 0 ) {
+      this.buttonEnble = true ;
+    }
+    else
+    { this.buttonEnble = false ; }
+}
+}

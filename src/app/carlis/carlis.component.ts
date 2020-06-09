@@ -29,6 +29,7 @@ export class CarlisComponent implements OnInit {
     'noOfCarsSold' ,
     'noOfCarsAvailable',
     'detail',
+    'add_shopping_cart',
     'update',
     'update2'
   ];

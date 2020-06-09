@@ -12,42 +12,22 @@ import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 })
 export class AppComponent  implements OnInit {
   title = 'CarM9';
-  actionStr: string ;
+  
 
   // constructor(public spinnerService: ProgressBarService )  { }
-  constructor(public cartService: CartService, public dialog: MatDialog  )  { }
+  constructor(public cartService: CartService)  { }
 
-public numtest: number ;
-public POrM: boolean = this.cartService.POrM ;
-// tslint:disable-next-line: align
+// public numtest: number ;
+public POrM: string ;
 ngOnInit() {
-    this.numtest = this.cartService.getNoOfCarsInCart() ;
+   // this.numtest = this.cartService.getNoOfCarsInCart() ;
+   this.POrM = this.cartService.POrM ;
 
    }
-doCartDialog() {
-  console.log('DoCartDialog.....') ;
+   doCartDialog() {
+     this.cartService.doCartDialog2() ;
+   }
 
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.hasBackdrop = true;
-  dialogConfig.data = this.cartService.getCarsForSales();
-  dialogConfig.width = '700px';
-  // tslint:disable-next-line: no-unused-expression
-  dialogConfig.maxHeight = '90vh';
-  // tslint:disable-next-line: no-unused-expression
-  // dialogConfig.scrollStrategy.enable ;
-  const dialogRef = this.dialog.open( CartDialogComponent , dialogConfig);
-
-
-
-  dialogRef.afterClosed().subscribe((result) => {
-    this.actionStr = result;
-    console.log ('Dialog output='  + result[0].color ) ;
-  }
-  );
-}
-}
   // doWork() {
 
   //   this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employees')
@@ -60,3 +40,4 @@ doCartDialog() {
   //       }
   //     );
   // }
+}

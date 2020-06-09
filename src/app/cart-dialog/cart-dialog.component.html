@@ -1,18 +1,16 @@
-<p>cart-dialog works!</p>
-
-<!--
+<!--                   <p>cart-dialog works!</p>
 <div *ngIf="confDelBut; else elseBlock1"><button mat-raised-button color="warn" cdkFocusInitial (click)="deleteCar(car2Details.car2.carRefId)">ConfirmDelete</button>
   <button mat-raised-button (click)="cancelDelete()" >CancelDelete</button>
   </div>
   <ng-template #elseBlock1> <button mat-raised-button cdkFocusInitial  (click)="deleteCar1(car2Details.car2)">Delete</button>
     <button mat-raised-button  [mat-dialog-close]="11" >Close</button>
   </ng-template>
- -->
 
 <div *ngIf="POrM; else elseBlockx"> <h3>  Manage  </h3>
 </div>
 <ng-template #elseBlockx> Pick </ng-template>
-
+-->
+  <h3>  {{dialogTitle}}   </h3>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="tableSource2">
     <ng-container matColumnDef="brand">
@@ -43,7 +41,7 @@
     <ng-container matColumnDef="chkbox">
     <th mat-header-cell *matHeaderCellDef> Check </th>
     <td mat-cell *matCellDef="let row2">
-    <mat-checkbox   (change)="onChangeEventFunc(row2, $event)">
+    <mat-checkbox   (change)="onChangeEventChkBox(row2, $event)">
 
       </mat-checkbox>
     </td>
@@ -56,6 +54,7 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="selected" cdkFocusInitial>Ok</button>
+  <button mat-button  mat-button [mat-dialog-close]="selectedArry" (click)="onNoClick()">Ok Close</button>
+  <button  mat-button  mat-button [mat-dialog-close]="selectedArry" cdkFocusInitial  (click)="removeCars()"  [disabled]="!buttonEnble">{{buttonTitle}} </button>
+  <!-- <button mat-button [mat-dialog-close]="selectedArry" cdkFocusInitial  (click)="removeCars()"  [disabled]="!buttonEnble">{{buttonTitle}} </button> -->
 </div>
