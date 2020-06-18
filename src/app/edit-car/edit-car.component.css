@@ -1,3 +1,24 @@
+.aTable {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 30%;
+  border-spacing: 4px;
+  tr {
+    background-color: ;
+  }
+  th {
+    width: 8%;
+    height: 136px;
+    font-size: 66px;
+    font-weight: bold;
+  }
+  td {
+    width: 8%;
+    /* height: 126px;
+    font-size: 45px;*/
+  }
+}
 table {
   width: 100%;
 }
@@ -6,7 +27,7 @@ tr:hover {
 }
 
 .mat-form-field {
-  font-size: 12px;
+  font-size: 8px;
   width: 100%;
 }
 th {
@@ -17,6 +38,7 @@ th {
 
 td {
   width: 8%;
+  height: 2px;
   font-size: 12px;
 }
 
@@ -70,6 +92,7 @@ p {
   margin-left: 0;
   margin-right: 0;
 }
+
 .mat-row {
   height: 0.3em;
 }

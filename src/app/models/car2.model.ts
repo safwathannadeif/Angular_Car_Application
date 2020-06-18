@@ -3,7 +3,7 @@ export class Car2 {
   brand: string;
   model: string;
   yearMade: number;
-  colorIndex:number=0 ;
+  colorIndex = 0 ;
   lisByColor: Car2Entry[];
 }
 export interface Car2Entry {

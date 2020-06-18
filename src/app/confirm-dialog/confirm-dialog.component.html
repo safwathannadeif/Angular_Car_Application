@@ -1,0 +1,30 @@
+<h3> {{confirmTitle}} </h3>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="confirmTblSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef> Value </th>
+      <td mat-cell *matCellDef="let row2"> {{row2.value}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="confirmTblColumns ; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row2; columns: confirmTblColumns;"></tr>
+
+  </table>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-button [mat-dialog-close]=1 (click)="confirm()">Confirm</button>
+  <button mat-button [mat-dialog-close]=0 (click)="cancel()">Cancel</button>
+
+</div>
+
+<!--
+<p>
+  <li *ngFor="let obj of nVpAry">{{obj | json}}</li>
+</p> -->

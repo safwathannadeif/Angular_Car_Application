@@ -1,88 +1,78 @@
 <div class="main-div">
-    <form [formGroup]="cusDetailsForm">
-        <table>
-            <tr>
-                <td>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Customer Name</mat-label>
-                        <b>
-                            <input matInput formControlName="cusNameCtl"   font-weight:lighter type="text" />
-                        </b>
-                    </mat-form-field>
-
-                </td>
-                <span></span> <span></span>
-
-                <td>
-                    <!-- <mat-form-field appearance="standard"> -->
-                    <mat-form-field appearance="outline">
-                        <mat-label>Customer Id</mat-label>
-                        <input matInput formControlName="cusIdCtl" type="text" />
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-    </form>
+  <form [formGroup]="cusDetailsForm">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Customer Name</mat-label>
+            <b>
+              <input matInput formControlName="cusNameCtl" font-weight:lighter type="text" />
+            </b>
+          </mat-form-field>
+        </td>
+        <span></span> <span></span>
+        <td>
+          <!-- <mat-form-field appearance="standard"> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Customer Id</mat-label>
+            <input matInput formControlName="cusIdCtl" type="text" />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>
-
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" >
-  
-      <ng-container matColumnDef="brand">
-        <th mat-header-cell *matHeaderCellDef > Brand </th>
-        <td mat-cell *matCellDef="let row"> {{row.brand}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="model">
-        <th mat-header-cell *matHeaderCellDef > Model </th>
-        <td mat-cell *matCellDef="let row"> {{row.model}} </td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource">
 
-      <ng-container matColumnDef="salesyear">
-        <th mat-header-cell *matHeaderCellDef >Year-Made </th>
-        <td mat-cell *matCellDef="let row"> {{row.salesyear}} </td>
-      </ng-container>
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef> Brand </th>
+      <td mat-cell *matCellDef="let row"> {{row.brand}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="carColor">
-        <th mat-header-cell *matHeaderCellDef >carColor </th>
-        <!-- <td mat-cell *matCellDef="let row"     [style.color]="getCarColor(row.carColor)"> {{row.carColor}} </td> -->
-        <td mat-cell *matCellDef="let row"     [style.color]="row.carColor"> {{row.carColor}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="carMileage">
-        <th mat-header-cell *matHeaderCellDef >carMileage </th>
-        <td mat-cell *matCellDef="let row"> {{row.carMileage}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="plateId">
-        <th mat-header-cell *matHeaderCellDef >plateId </th>
-        <td mat-cell *matCellDef="let row"> {{row.plateId}} </td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="carColor33"> 
-        <th mat-header-cell *matHeaderCellDef >carColor33 </th>
-        <td mat-cell  *matCellDef="let row"   >
-
-          <button mat-icon-button [style.color]=colorInDisp [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-            {{ selectedVal }}</button>
-
-          <!-- <button mat-button [style.color]=colorInDisp [matMenuTriggerFor]="menu">{{ selectedVal }}</button> -->
-         <mat-menu #menu="matMenu">
-          <div  *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"   [style.color]=elm.carColor >
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model </th>
+      <td mat-cell *matCellDef="let row"> {{row.model}} </td>
+    </ng-container>
+    <ng-container matColumnDef="salesyear">
+      <th mat-header-cell *matHeaderCellDef>Year-Made </th>
+      <td mat-cell *matCellDef="let row"> {{row.salesyear}} </td>
+    </ng-container>
+    <ng-container matColumnDef="carColor">
+      <th mat-header-cell *matHeaderCellDef>carColor </th>
+      <!-- <td mat-cell *matCellDef="let row"     [style.color]="getCarColor(row.carColor)"> {{row.carColor}} </td> -->
+      <td mat-cell *matCellDef="let row" [style.color]="row.carColor"> {{row.carColor}} </td>
+    </ng-container>
+    <ng-container matColumnDef="carMileage">
+      <th mat-header-cell *matHeaderCellDef>carMileage </th>
+      <td mat-cell *matCellDef="let row"> {{row.carMileage}} </td>
+    </ng-container>
+    <ng-container matColumnDef="plateId">
+      <th mat-header-cell *matHeaderCellDef>plateId </th>
+      <td mat-cell *matCellDef="let row"> {{row.plateId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="carColor33">
+      <th mat-header-cell *matHeaderCellDef>carColor33 </th>
+      <td mat-cell *matCellDef="let row"> <button mat-icon-button [style.color]=colorInDisp [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+          {{ selectedVal }}
+        </button>
+        <!-- <button mat-button [style.color]=colorInDisp [matMenuTriggerFor]="menu">{{ selectedVal }}</button> -->
+        <mat-menu #menu="matMenu">
+          <div *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay" [style.color]=elm.carColor>
             <button mat-menu-item [style.color]=elm.carColor (click)="selectedItem(elm)"> {{ elm.carColor }}</button>
           </div>
         </mat-menu>
-      </ng-container>
-   
-<!-- 
-      <ng-container matColumnDef="carColor33"> 
+    </ng-container>
+
+    <!--
+      <ng-container matColumnDef="carColor33">
         <th mat-header-cell *matHeaderCellDef >carColor33 </th>
         <td mat-cell  *matCellDef="let row"   >
-        <mat-form-field style="width:72px" >    
+        <mat-form-field style="width:72px" >
           <mat-chip-list #chipList >
-          
+
             <mat-chip       [style.color]=fruits [value]="fruits"
               [selectable]="selectable"
               [removable]="removable"
@@ -91,7 +81,7 @@
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input
-             
+
               #fruitInput
               [formControl]="fruitCtrl"
               [matAutocomplete]="auto"
@@ -101,64 +91,47 @@
             </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChangeChip($event)">
           <mat-option *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay "   [style.color]=elm.carColor [value]="elm">
-            {{elm.carColor}} 
+            {{elm.carColor}}
           </mat-option>
         </mat-autocomplete>
         </mat-form-field>
-         
-        </td>
 
-      </ng-container>  
+        </td>       </ng-container>
     -->
-
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-</div>
+  </table>
+</div> <!-- <mat-form-field style="width:92px;height:70px" >  // -->
 
-<!-- <mat-form-field style="width:92px;height:70px" >  // -->
- 
-    <mat-form-field style="width:92px" >    
-  <mat-chip-list #chipList  aria-label="Fruit selection">
+<mat-form-field style="width:92px">
+  <mat-chip-list #chipList aria-label="Fruit selection">
     <!-- <mat-chip     *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"   [style.color]=elm.carColor [value]="elm" -->
-    <mat-chip       [style.color]=fruits [value]="fruits"
-      [selectable]="selectable"
-      [removable]="removable"
+    <mat-chip [style.color]=fruits [value]="fruits" [selectable]="selectable" [removable]="removable"
       (removed)="remove()">
       {{fruits}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
-    <input
-      placeholder="New fruit..."
-      #fruitInput
-      [formControl]="fruitCtrl"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    <input placeholder="New fruit..." #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+      [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
-<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChangeChip($event)">
-  <mat-option *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay "   [style.color]=elm.carColor [value]="elm">
-    {{elm.carColor}} 
-  </mat-option>
-</mat-autocomplete>
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChangeChip($event)">
+    <mat-option *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay " [style.color]=elm.carColor [value]="elm">
+      {{elm.carColor}}
+    </mat-option>
+  </mat-autocomplete>
 </mat-form-field>
 <!-- http://tomoveahead.com/angular-material-menu/-->
-
-
 <!-- <button mat-button [matMenuTriggerFor]="select" > -->
-<!--   
+<!--
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"> -->
 <button mat-button [style.color]=colorInDisp [matMenuTriggerFor]="menu">{{ selectedVal }}</button>
 <mat-menu #menu="matMenu">
-  <ng-container  *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"   [style.color]=elm.carColor >
+  <ng-container *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay" [style.color]=elm.carColor>
     <button mat-menu-item [style.color]=elm.carColor (click)="selectedItem(elm)"> {{ elm.carColor }}</button>
   </ng-container>
-</mat-menu>
-
-<!-- *****-->
-<!-- Try2 --> 
+</mat-menu> <!-- *****-->
+<!-- Try2 -->
 <!--
 <mat-chip-list aria-label="Fish selection">
   <mat-chip  [style.color]="colorforselecteOpt"> Try1</mat-chip>
@@ -167,19 +140,16 @@
   <mat-chip [style.color]=green selected>Accent fish</mat-chip>
 </mat-chip-list>
 -->
-
 <!--
 <h4>Basic mat-select</h4>
- <mat-form-field>                    
+ <mat-form-field>
   <mat-label>CarsColors</mat-label>
   <mat-select>
     <mat-option  *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"     [value]="elm">
       {{elm.carColor}}
     </mat-option>
   </mat-select>
-</mat-form-field> 
-
-<mat-form-field>
+</mat-form-field>  <mat-form-field>
   <mat-label>Select an option</mat-label>
   <mat-select >
     <mat-option>None</mat-option>
@@ -187,34 +157,29 @@
       {{elm.carColor}}
     </mat-option>
   </mat-select>
-</mat-form-field>
-
-<!-- <mat-select id="xxxx"  
-      placeholder="AllColors" 
+</mat-form-field> <!-- <mat-select id="xxxx"
+      placeholder="AllColors"
       (selectionChange)="onSelectChange($event)">
-      <mat-option 
+      <mat-option
         *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"
         [value]="elm">
         {{elm.carColor}}
       </mat-option>
-    </mat-select> 
+    </mat-select>
   -->
-  
- <!-- label id="example-radio-group-label">Try.....n</label -->
 
-    <!-- color="elm.carColor"  [style.color]="elm.carColor"  <mat-radio-group   aria-labelledby="example-radio-group-label"   class="example-radio-group"  [(ngModel)]="cusDetails.cusCarDetailsElmListDisplay"> 
+<!-- label id="example-radio-group-label">Try.....n</label -->
+<!-- color="elm.carColor"  [style.color]="elm.carColor"  <mat-radio-group   aria-labelledby="example-radio-group-label"   class="example-radio-group"  [(ngModel)]="cusDetails.cusCarDetailsElmListDisplay">
       <mat-radio-group   aria-labelledby="example-radio-group-label" (change)="onRadioChange($event)"  class="example-radio-group"  >
-    
-      <mat-radio-button class="example-radio-button" *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay" 
+
+      <mat-radio-button class="example-radio-button" *ngFor="let elm of cusDetails.cusCarDetailsElmListDisplay"
       color="primary"         [style.color]="elm.carColor"      [value]="elm">
         {{ elm.carColor}}
         </mat-radio-button>
-    
+
     </mat-radio-group -->
-<!-- 
+<!--
 <p>customerdetails works!</p>
 <p>
-    {{ cusDetails |json}}
-
-</p> 
+    {{ cusDetails |json}} </p>
 -->

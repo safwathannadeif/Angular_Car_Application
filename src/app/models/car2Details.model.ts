@@ -6,6 +6,6 @@ export class  Car2Details {
     noOfCarsSoldTot: number;
     // tslint:disable-next-line: whitespace
     // tslint:disable-next-line: typedef-whitespace
-    srTot:number = 0 ;
+    srTot = 0 ;
     noOfCarsAvailableTot: number;
   }

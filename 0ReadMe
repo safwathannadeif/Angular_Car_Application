@@ -1,2 +1,7 @@
 CRUD Car Application
 Server side: Spring: Spring Boot 2 &  MongoDB Repo: https://github.com/safwathannadeif/Spring-Boot2-with-Mongodb
+
+setting eslint and vscode:
+https://www.digitalocean.com/community/tutorials/workflow-auto-eslinting
+Quick run for small script:
+https://www.typescriptlang.org/play/index.html

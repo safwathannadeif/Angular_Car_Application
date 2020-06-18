@@ -1,0 +1,110 @@
+<!-- Header Data -->
+
+<table mat-table [dataSource]="headSourceData" cellspacing="0" cellpadding="0">
+  <ng-container matColumnDef="brand">
+    <th mat-header-cell *matHeaderCellDef> Brand </th>
+    <td mat-cell *matCellDef="let rowh;" style="font-size:110%;"> {{rowh[0]}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> Model </th>
+    <td mat-cell *matCellDef="let rowh;" style="font-size:110%;"> {{rowh[1]}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> Yaer </th>
+    <td mat-cell *matCellDef="let rowh;" style="font-size:110%;"> {{rowh[2]}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="addNewColor">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button [disabled]=disAbleAddNewColor (click)="addNewColor()">
+        <mat-icon>add_comment</mat-icon>
+        <mat-hint>NewColor</mat-hint>
+      </button>
+    </th>
+    <td mat-cell *matCellDef="let rowh;">
+
+    </td>
+  </ng-container>
+  <!-- Row definitions -->
+  <tr mat-header-row *matHeaderRowDef="dispHeaderColums"></tr>
+  <tr mat-row *matRowDef="let rowh;  columns: dispHeaderColums;"></tr>
+</table>
+
+<!--  addNewColor  <mat-icon>control_point</mat-icon> Header Data -->
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+
+<form [formGroup]="formGrp">
+  <mat-table [dataSource]="dataSource" formArrayName="formAray" cellspacing="0">
+    <!--  colorFlag  -->
+    <ng-container matColumnDef="colorFlag">
+      <th mat-header-cell *matHeaderCellDef> Color </th>
+      <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
+        <div *ngIf="row.color  else newNoClor">
+          <mat-icon [style.color]=row.color>flag</mat-icon>
+          <mat-hint>{{row.color}}</mat-hint>
+        </div>
+        <ng-template #newNoClor>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+            {{ newColors[0]}}
+          </button>
+          <mat-menu #menu="matMenu">
+            <div *ngFor="let newElmColor of newColors" [style.color]=newElmColor>
+              <button mat-menu-item [style.color]=newElmColor (click)="selectedNewColor(newElmColor)">
+                {{ newElmColor}} </button>
+            </div>
+          </mat-menu>
+        </ng-template>
+      </td>
+    </ng-container>
+    <!-- averagePrice -->
+    <ng-container matColumnDef="averagePrice">
+      <th mat-header-cell *matHeaderCellDef> AveragePrice </th>
+      <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
+
+        <input type="text" formControlName="averagePrice" (change)="onChangeUpdEvent(indexr)">
+
+      </td>
+    </ng-container>
+    <!-- noOfCarsSold -->
+    <ng-container matColumnDef="noOfCarsSold">
+      <th mat-header-cell *matHeaderCellDef> NoOfCarsSold </th>
+      <td mat-cell *matCellDef="let row; let indexr = index; let last = row" [formGroupName]="indexr">
+        <input type="text" formControlName="noOfCarsSold" (change)="onChangeUpdEvent(indexr)">
+      </td>
+    </ng-container>
+
+    <!-- noOfCarsAvailable -->
+    <ng-container matColumnDef="noOfCarsAvailable">
+      <th mat-header-cell *matHeaderCellDef> NoOfCarsAvailable </th>
+      <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
+        <input type="text" formControlName="noOfCarsAvailable" (change)="onChangeUpdEvent(indexr)">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="saveUpdate">
+      <th mat-header-cell *matHeaderCellDef> SaveUpdate </th>
+      <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
+        <button mat-icon-button [disabled]=disAbleBooleanActionArry[indexr] (click)="saveUpd(indexr)">
+          <mat-icon>save_alt</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <!-- <mat-icon>delete_forever</mat-icon> -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
+        <button mat-icon-button [disabled]=!disAbleBooleanActionArry[indexr] (click)="delete(indexr)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <!-- Row definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;  columns: displayedColumns;"></tr>
+  </mat-table>
+</form>

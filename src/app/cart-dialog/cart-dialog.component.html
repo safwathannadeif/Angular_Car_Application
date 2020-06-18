@@ -54,7 +54,7 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button  mat-button [mat-dialog-close]="selectedArry" (click)="onNoClick()">Ok Close</button>
-  <button  mat-button  mat-button [mat-dialog-close]="selectedArry" cdkFocusInitial  (click)="removeCars()"  [disabled]="!buttonEnble">{{buttonTitle}} </button>
-  <!-- <button mat-button [mat-dialog-close]="selectedArry" cdkFocusInitial  (click)="removeCars()"  [disabled]="!buttonEnble">{{buttonTitle}} </button> -->
+  <button mat-button  mat-button [mat-dialog-close]=11 >Ok Close</button>
+  <button  mat-button    (click)="removeOrSlectCars()"  [disabled]="!buttonEnble">{{buttonTitle}} </button>
+
 </div>
