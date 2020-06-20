@@ -36,9 +36,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
+import { CartDialogService } from './cart-dialog/cart-dialog.component';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatAutocompleteModule,
     MatMenuModule,
     MatCheckboxModule,
+    MatSnackBarModule,
   ],
 
   providers: [

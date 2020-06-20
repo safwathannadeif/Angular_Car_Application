@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Car2, Car2Entry } from '../models/car2.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Comservices } from '../Comservices';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogService,
+} from '../confirm-dialog/confirm-dialog.component';
+
 import { ColorsToUse } from '../models/colors.model';
 @Component({
   selector: 'app-edit-car',
@@ -14,9 +20,11 @@ import { ColorsToUse } from '../models/colors.model';
 export class EditCarComponent implements OnInit {
   constructor(
     public carHttpService: Comservices,
-    public shareServ: SharedService,
+    public confirmService: ConfirmDialogService,
     public formBuilder: FormBuilder,
-    public colorToUse: ColorsToUse
+    public colorToUse: ColorsToUse,
+    public shareService: SharedService,
+    public snackBar: MatSnackBar
   ) {}
   public car2: Car2;
   public formGrp: FormGroup;
@@ -36,9 +44,10 @@ export class EditCarComponent implements OnInit {
   public formAray = new FormArray([]);
   public disAbleBooleanActionArry = new Array<boolean>();
   public newColors: string[];
+  public newAddedColor = 'Select Color';
 
   ngOnInit(): void {
-    this.car2 = this.shareServ.getCarToEdit();
+    this.car2 = this.shareService.getCarToEdit();
     this.formGrp = this.formBuilder.group({ formAray: this.formAray });
     this.setGrpFormArray();
     this.dataSource.data = this.car2.lisByColor;
@@ -49,7 +58,6 @@ export class EditCarComponent implements OnInit {
     row0.push(this.car2.yearMade.toString());
     this.dispHeaderData.push(row0);
     this.headSourceData.data = this.dispHeaderData;
-    // form: FormGroup = this.fb.group({ 'dates': this.rows });
   }
   public setGrpFormArray(): void {
     let inx = 0;
@@ -62,9 +70,9 @@ export class EditCarComponent implements OnInit {
   public setGrpOneForm(car2Entry: Car2Entry): FormGroup {
     return this.formBuilder.group({
       color: [car2Entry.color],
-      averagePrice: [car2Entry.averagePrice],
-      noOfCarsSold: [car2Entry.noOfCarsSold],
-      noOfCarsAvailable: [car2Entry.noOfCarsAvailable],
+      averagePrice: [car2Entry.averagePrice, Validators.required],
+      noOfCarsSold: [car2Entry.noOfCarsSold, Validators.required],
+      noOfCarsAvailable: [car2Entry.noOfCarsAvailable, Validators.required],
     });
   }
   onChangeUpdEvent(indexr: number): void {
@@ -79,14 +87,12 @@ export class EditCarComponent implements OnInit {
     ) {
       this.disAbleBooleanActionArry[indexr] = false;
     }
-
-    // Test modify the datasource via car2Entry.lisBuColor
-    // this.car2.lisByColor.splice(indexr, 1);
-    // this.formAray.removeAt(indexr);
-    // this.dataSource.data = this.car2.lisByColor;
-
-    // this.formAray.push
+    this.showSnackbar('Ok Done with');
   }
+  public showSnackbar(content: string) {
+    this.snackBar.open(content, 'OK');
+  }
+
   public saveUpd(indexr: number): void {
     const arrayControl = this.formGrp.get('formAray') as FormArray;
     this.car2.lisByColor[indexr] = arrayControl.at(indexr).value as Car2Entry;
@@ -104,10 +110,12 @@ export class EditCarComponent implements OnInit {
     this.disAbleBooleanActionArry[indexr] = true;
   }
   public delete(indexr: number): void {
-    this.shareServ.pushJsonObjToNVPArray(this.shareServ.car2CarForSale(this.car2, indexr));
-    this.shareServ.confirmDialogTitle = 'Confirm Delete Car Entry?';
-    this.shareServ.doConfirmDialog();
-    this.shareServ
+    this.confirmService.pushJsonObjToNVPArray(
+      this.confirmService.car2CarForSale(this.car2, indexr)
+    );
+    this.confirmService.confirmDialogTitle = 'Confirm Delete Car Entry?';
+    this.confirmService.doConfirmDialog();
+    this.confirmService
       .getConfirmedAnswer()
       .subscribe((ans) => console.log('******* ConfirmDialogAnswer from edit   is ====>' + ans));
   }
@@ -135,7 +143,8 @@ export class EditCarComponent implements OnInit {
     this.dataSource.data = this.car2.lisByColor;
     console.log('addNewColor  Done return:' + this.newColors);
   }
-  public selectedNewColor(colorSelecte: string): void {
-    console.log('selectedNewColor=:' + colorSelecte);
+  public selectedNewColor(colorSelected: string, indxr: number): void {
+    console.log('selectedNewColor=:' + colorSelected);
+    this.newAddedColor = colorSelected;
   }
 }

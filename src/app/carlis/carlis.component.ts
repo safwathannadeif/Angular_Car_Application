@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { CartService } from '../cart.service';
+import { CartDialogService } from '../cart-dialog/cart-dialog.component';
 import { Comservices } from '../Comservices';
 import { Car2 } from '../models/car2.model';
 import { Car2Entry } from '../models/Car2.model';
@@ -50,7 +50,7 @@ export class CarlisComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
     public sharedService: SharedService,
-    private cartService: CartService
+    private cartService: CartDialogService
   ) {}
 
   ngOnInit() {
@@ -77,10 +77,6 @@ export class CarlisComponent implements OnInit {
 
   selectedItem33(row: Car2, elm: Car2Entry) {
     /////  //https://stackoverflow.com/questions/44120645/angular-update-object-in-object-array
-    // console.log('Calling selectedItem33 to do................. ....');
-    // console.log('row:Car2==' + row.model ) ;
-    // console.log('row:Car2==' + row.colorIndex ) ;
-    // console.log('elm:Car2Entry==' + elm.color ) ;
     // let car2xx = this.dataSource.data.find(itm => itm.brand === row.brand && itm.model === row.model )
     const itemIndex = row.lisByColor.findIndex((item) => item.color === elm.color);
     // let itemToReplce = row.lisByColor.find(item  => item.color ===  elm.color) ;
@@ -122,9 +118,6 @@ export class CarlisComponent implements OnInit {
   updateCarLisAfteLoad() {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.carLis.length; i++) {
-      // if(this.itemsArray[i].id == newItem.id){  ///////////// here is with condition
-      //   this.users[i] = newItem;
-      // }
       this.carLis[i].colorIndex = 0;
     }
   }

@@ -49,13 +49,13 @@
           <mat-hint>{{row.color}}</mat-hint>
         </div>
         <ng-template #newNoClor>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
+          <button mat-icon-button [style.color]=newAddedColor [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
-            {{ newColors[0]}}
+            {{ newAddedColor}}
           </button>
           <mat-menu #menu="matMenu">
             <div *ngFor="let newElmColor of newColors" [style.color]=newElmColor>
-              <button mat-menu-item [style.color]=newElmColor (click)="selectedNewColor(newElmColor)">
+              <button mat-menu-item [style.color]=newElmColor (click)="selectedNewColor(newElmColor,indexr)">
                 {{ newElmColor}} </button>
             </div>
           </mat-menu>
@@ -67,7 +67,7 @@
       <th mat-header-cell *matHeaderCellDef> AveragePrice </th>
       <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
 
-        <input type="text" formControlName="averagePrice" (change)="onChangeUpdEvent(indexr)">
+        <input type="number" formControlName="averagePrice" (change)="onChangeUpdEvent(indexr)">
 
       </td>
     </ng-container>
