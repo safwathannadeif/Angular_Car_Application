@@ -23,7 +23,7 @@ export class ConfirmDialogComponent implements OnInit {
     public confirmService: ConfirmDialogService
   ) {}
 
-  public confirmTitle: string;
+  public confirmTitle: string = this.confirmService.confirmDialogTitle;
   public confirmTblSource = new MatTableDataSource<NVP>();
   confirmTblColumns: string[] = ['name', 'value'];
   public confirmDialogTitle: string;

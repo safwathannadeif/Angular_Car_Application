@@ -67,7 +67,7 @@
       <th mat-header-cell *matHeaderCellDef> AveragePrice </th>
       <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
 
-        <input type="number" formControlName="averagePrice" (change)="onChangeUpdEvent(indexr)">
+        <input type="text" formControlName="averagePrice" (change)="onChangeUpdEvent(indexr)">
 
       </td>
     </ng-container>
@@ -89,7 +89,8 @@
     <ng-container matColumnDef="saveUpdate">
       <th mat-header-cell *matHeaderCellDef> SaveUpdate </th>
       <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
-        <button mat-icon-button [disabled]=disAbleBooleanActionArry[indexr] (click)="saveUpd(indexr)">
+
+        <button mat-icon-button [disabled]=disAbleUpdActionArry[indexr] (click)="saveUpd(indexr)">
           <mat-icon>save_alt</mat-icon>
         </button>
       </td>
@@ -98,7 +99,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Delete </th>
       <td mat-cell *matCellDef="let row; let indexr = index" [formGroupName]="indexr">
-        <button mat-icon-button [disabled]=!disAbleBooleanActionArry[indexr] (click)="delete(indexr)">
+        <button mat-icon-button [disabled]=!disAbleUpdActionArry[indexr] (click)="delete(indexr)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
