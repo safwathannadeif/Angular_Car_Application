@@ -42,7 +42,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +82,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatTooltipModule,
   ],
 
   providers: [

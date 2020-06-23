@@ -1,5 +1,6 @@
-<!-- Header Data -->
+<h4 align=center> Edit Car </h4>
 
+<!-- Header Data -->
 <table mat-table [dataSource]="headSourceData" cellspacing="0" cellpadding="0">
   <ng-container matColumnDef="brand">
     <th mat-header-cell *matHeaderCellDef> Brand </th>
@@ -18,13 +19,22 @@
   </ng-container>
   <ng-container matColumnDef="addNewColor">
     <th mat-header-cell *matHeaderCellDef>
-      <button mat-icon-button [disabled]=disAbleAddNewColor (click)="addNewColor()">
+      <button mat-icon-button color="primary" [disabled]=disAbleAddNewColor (click)="addNewColor()">
         <mat-icon>add_comment</mat-icon>
         <mat-hint>NewColor</mat-hint>
       </button>
     </th>
     <td mat-cell *matCellDef="let rowh;">
-
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="close">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" [disabled]=disAbleClose (click)="close()">
+        <mat-icon>close</mat-icon>
+        <mat-hint>CloseEdit</mat-hint>
+      </button>
+    </th>
+    <td mat-cell *matCellDef="let rowh;">
     </td>
   </ng-container>
   <!-- Row definitions -->

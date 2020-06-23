@@ -5,6 +5,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,7 +23,6 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./carlis.component.css'],
 })
 export class CarlisComponent implements OnInit {
-  // title = 'angularmat';
   displayedColumns: string[] = [
     'brand',
     'yearMade',
@@ -34,7 +34,6 @@ export class CarlisComponent implements OnInit {
     'detail',
     'add_shopping_cart',
     'update',
-    'update2',
   ];
 
   actionStr: string;
@@ -58,26 +57,26 @@ export class CarlisComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  addNew(): void {}
-  addRow(row: Car2): void {
-    console.log('AddRow with ' + row.lisByColor[row.colorIndex].color);
+  addNew(): void {
+    ////  ToDo
   }
-  // tslint:disable-next-line: no-unused-expression
-  updateRow(row: Car2): void {
-    console.log('UpdateRow with ' + row.lisByColor[row.colorIndex].color);
-  }
-  // tslint:disable-next-line: align
-  deleteRow(row: Car2) {
-    console.log('deleteRow with ' + row.lisByColor[row.colorIndex].color);
-  }
+  // addRow(row: Car2): void {
+  //   console.log('AddRow with ' + row.lisByColor[row.colorIndex].color);
+  // }
+  // // tslint:disable-next-line: no-unused-expression
+  // updateRow(row: Car2): void {
+  //   console.log('UpdateRow with ' + row.lisByColor[row.colorIndex].color);
+  // }
+  // // tslint:disable-next-line: align
+  // deleteRow(row: Car2) {
+  //   console.log('deleteRow with ' + row.lisByColor[row.colorIndex].color);
+  // }
   addToCart(row: Car2) {
     console.log('addToCart with ' + row.lisByColor[row.colorIndex].color);
     this.cartService.addToCart2(row);
   }
 
   selectedItem33(row: Car2, elm: Car2Entry) {
-    /////  //https://stackoverflow.com/questions/44120645/angular-update-object-in-object-array
-    // let car2xx = this.dataSource.data.find(itm => itm.brand === row.brand && itm.model === row.model )
     const itemIndex = row.lisByColor.findIndex((item) => item.color === elm.color);
     // let itemToReplce = row.lisByColor.find(item  => item.color ===  elm.color) ;
     // Update the input row to match the colore selected by elm/Car2Entry

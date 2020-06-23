@@ -12,6 +12,7 @@ import {
 } from '../confirm-dialog/confirm-dialog.component';
 
 import { ColorsToUse } from '../models/colors.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-car',
   templateUrl: './edit-car.component.html',
@@ -24,13 +25,14 @@ export class EditCarComponent implements OnInit {
     public formBuilder: FormBuilder,
     public colorToUse: ColorsToUse,
     public shareService: SharedService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public router: Router
   ) {}
   public car2: Car2;
   public formGrp: FormGroup;
   public dataSource = new MatTableDataSource<Car2Entry>();
   public headSourceData = new MatTableDataSource<string[]>();
-  public dispHeaderColums = ['brand', 'model', 'year', 'addNewColor'];
+  public dispHeaderColums = ['brand', 'model', 'year', 'addNewColor', 'close'];
   public dispHeaderData: string[][];
   displayedColumns = [
     'colorFlag',
@@ -45,6 +47,7 @@ export class EditCarComponent implements OnInit {
   public disAbleUpdActionArry = new Array<boolean>();
   public newColors: string[];
   public newAddedColor = 'Select Color';
+  public disAbleClose = false;
 
   ngOnInit(): void {
     this.car2 = this.shareService.getCarToEdit();
@@ -76,6 +79,7 @@ export class EditCarComponent implements OnInit {
     });
   }
   onChangeUpdEvent(indexr: number): void {
+    this.disAbleUpdActionArry[indexr] = true;
     const arrayControl = this.formGrp.get('formAray') as FormArray;
     const updColor = arrayControl.at(indexr).get('averagePrice').value;
     if (updColor === '' || updColor === 'Select Color') {
@@ -94,20 +98,21 @@ export class EditCarComponent implements OnInit {
     ) {
       return;
     }
-    if (updAveragePrice <= 0) {
+    if (isNaN(updAveragePrice) || updAveragePrice <= 0) {
       this.showSnackbar('AveragePrice should be number > 0');
       return;
     }
-    if (updNoOfCarsSold <= 0) {
+    if (isNaN(updNoOfCarsSold) || updNoOfCarsSold <= 0) {
       this.showSnackbar('NoOfCarsSold   should be number > 0');
       return;
     }
-    if (updNoOfCarsAvailable <= 0) {
+    if (isNaN(updNoOfCarsAvailable) || updNoOfCarsAvailable <= 0) {
       this.showSnackbar('NoOfCarsAvailable should be number > 0');
       return;
     }
 
     this.disAbleUpdActionArry[indexr] = false;
+    this.checkDisAbleClose();
   }
   public showSnackbar(content: string) {
     this.snackBar.open(content, 'OK');
@@ -119,18 +124,19 @@ export class EditCarComponent implements OnInit {
     const updAveragePrice = arrayControl.at(indexr).get('averagePrice').value;
     const updNoOfCarsSold = arrayControl.at(indexr).get('noOfCarsSold').value;
     const updNoOfCarsAvailable = arrayControl.at(indexr).get('noOfCarsAvailable').value;
-    let updColor = this.car2.lisByColor[indexr].color;
+
     //
-    if (updColor === '') {
-      updColor = this.newAddedColor;
-      this.car2.lisByColor[indexr].color = this.newAddedColor;
-    }
 
     this.confirmService.pushOneNVPToNVPArray('Brand', this.car2.brand);
     this.confirmService.pushOneNVPToNVPArray('Model', this.car2.model);
     this.confirmService.pushOneNVPToNVPArray('Year', this.car2.yearMade.toString());
     //  const lisCarx = this.formAray[indexr] as Car2Entry ;
     // this.confirmService.pushJsonObjToNVPArray(lisCarx);
+    let updColor = this.car2.lisByColor[indexr].color;
+    if (updColor === '') {
+      updColor = this.newAddedColor;
+      this.car2.lisByColor[indexr].color = this.newAddedColor;
+    }
     this.confirmService.pushOneNVPToNVPArray('Color', updColor);
     this.confirmService.pushOneNVPToNVPArray('AveragePrice', updAveragePrice);
     this.confirmService.pushOneNVPToNVPArray('NoOfCarsSold', updNoOfCarsSold);
@@ -144,8 +150,10 @@ export class EditCarComponent implements OnInit {
         this.car2.lisByColor[indexr].noOfCarsAvailable = updNoOfCarsAvailable;
         console.log('Updated Car2=' + JSON.stringify(this.car2));
         this.updHttp();
-        this.disAbleUpdActionArry[indexr] = true;
 
+        this.disAbleUpdActionArry[indexr] = true;
+        // Check disAbleClose
+        this.checkDisAbleClose();
         this.dataSource.data = this.car2.lisByColor;
       } else {
         this.rollbackUpd(indexr);
@@ -184,6 +192,7 @@ export class EditCarComponent implements OnInit {
         } else {
           this.disAbleAddNewColor = false;
         }
+        this.checkDisAbleClose();
         this.dataSource.data = this.car2.lisByColor;
       }
     });
@@ -197,9 +206,9 @@ export class EditCarComponent implements OnInit {
         noOfCarsAvailable: [''],
       })
     );
-    this.disAbleUpdActionArry[this.disAbleUpdActionArry.length] = true;
+    this.disAbleUpdActionArry.push(true);
     this.disAbleAddNewColor = true;
-
+    this.disAbleClose = true;
     this.car2.lisByColor.push({
       color: '', // color is undefined during adding new color
       averagePrice: 0,
@@ -217,17 +226,31 @@ export class EditCarComponent implements OnInit {
     this.newAddedColor = colorSelected;
   }
   public rollbackUpd(indexr: number) {
-    console.log('rollbackUpd#1:');
+    this.disAbleUpdActionArry[indexr] = true;
+
     if (this.disAbleAddNewColor === true) {
       // new Added Car Case
       this.newAddedColor = 'Select Color';
       this.formAray.removeAt(indexr);
       this.car2.lisByColor.splice(indexr, 1);
+      this.disAbleUpdActionArry.splice(indexr, 1);
       this.disAbleAddNewColor = false;
     } else {
+      // existing Car Case
       this.formAray.at(indexr).setValue(this.car2.lisByColor[indexr]);
-      this.disAbleUpdActionArry[indexr] = true;
     }
+    // Check disAbleClose
+    this.checkDisAbleClose();
+
     this.dataSource.data = this.car2.lisByColor;
+  }
+  public close(): void {
+    this.router.navigateByUrl('/car');
+  }
+  // Check disAbleClose
+  public checkDisAbleClose() {
+    const noPendingChg = this.disAbleUpdActionArry.every((item) => item === true);
+    console.log('noPendingChg1 =' + noPendingChg);
+    this.disAbleClose = noPendingChg && !this.disAbleAddNewColor ? false : true;
   }
 }
